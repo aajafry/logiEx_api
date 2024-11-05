@@ -1,0 +1,45 @@
+import express from "express";
+import { inventoriesController } from "../controllers/index.js";
+import { authGuard } from "../middlewares/authGuard.js";
+
+const inventoriesRouter = express.Router();
+
+inventoriesRouter.post(
+  "/",
+  authGuard(["admin", "inventory-manager"]),
+  inventoriesController.create
+);
+inventoriesRouter.get(
+  "/",
+  authGuard([
+    "admin",
+    "procurement-manager",
+    "inventory-manager",
+    "inventory-in-charge",
+    "guest",
+  ]),
+  inventoriesController.retrieveAll
+);
+inventoriesRouter.get(
+  "/:name",
+  authGuard([
+    "admin",
+    "procurement-manager",
+    "inventory-manager",
+    "inventory-in-charge",
+    "guest",
+  ]),
+  inventoriesController.retrieveByName
+);
+inventoriesRouter.put(
+  "/:name",
+  authGuard(["admin", "inventory-manager"]),
+  inventoriesController.updateByName
+);
+inventoriesRouter.delete(
+  "/:name",
+  authGuard(["admin"]),
+  inventoriesController.deleteByName
+);
+
+export { inventoriesRouter };
