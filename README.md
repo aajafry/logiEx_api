@@ -8,7 +8,6 @@ logiEx is a multi-inventory management API application build with Node.js, Expre
 
    ```bash
    git clone https://github.com/aajafry/logiEx.git
-   git checkout -b backend
    ```
 
 2. **Create Migrations Directory:**
